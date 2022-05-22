@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+
+<!--Definir un boton que diga new producto-->
+<!--databs se agrego hata #exampleModal-->
+<div class="text-center">
+    <button class="btn btn-success m-3"
+    data-bs-toggle="modal" data-bs-target="#exampleModal"> New product </button>
+</div>
+<hr>
+
+
+<!--Hordenamiento de los objetos (row y div)-->
+<!-- line 6 : Text center para hacer que el contenido quede de manera centrada -->
+<div class="row">
+    <div  *ngFor="let product of products"  class="card m-4 text-center" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{product.category.name}}</h6>
+          <p class="card-text"> stock: {{product.stock}}.</p>
+          <p class="card-text">sales: {{product.sales}}</p>
+          <p class="card-text">Q: {{product.price}}</p>
+          
+          <button class="btn btn-primary">Add to Shoopin card </button>
+        </div>
+      </div>
+</div>
+
+<!-- Modal save product-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <form >
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">name</label>
+                  <input [(ngModel)]="product.name" name="name" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+            
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">categoria</label>
+                  <select [(ngModel)]="product.category" name="category" class="form-select" aria-label="Default select example">
+                    <option disabled>Open this select menu</option>
+                    <option *ngFor="let category of categorys" value="{{category._id}}"> {{category.name}}</option>
+
+                  </select>
+
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">stock</label>
+                    <input [(ngModel)]="product.stock" name="stock" type="text" class="form-control" id="exampleInputPassword3">
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">precio</label>
+                    <input [(ngModel)]="product.price" name="price" type="text" class="form-control" id="exampleInputPassword4">
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button (click)="saveProduct()"  type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
